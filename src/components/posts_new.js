@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { Field, reduxForm} from 'redux-form';
+import { Link } from 'react-router-dom'
+
+import { connect } from 'react-redux';
+import { createPost } from '../actions';
 
 // import { Link } from 'react-router-dom';
 
@@ -27,7 +31,10 @@ class PostsNew extends Component {
 
 	// this is run after redux-form says everything is AOK
 	onSubmit(values) {
-		console.log(values);
+		this.props.createPost(values, () => {
+			this.props.history.push('/');
+		});
+
 	}
 
 	render() {
@@ -59,10 +66,11 @@ class PostsNew extends Component {
 					className="btn btn-primary"
 				>Submit</button>
 
-				<button
-					type="cancel"
-					className="btn btn-primary"
-				>Cancel</button>
+				<Link
+					to="/"
+					className="btn btn-danger">
+					Cancel
+				</Link>
 			</form>
 		);
 	}
@@ -94,4 +102,6 @@ function validate(values) {
 export default reduxForm({
 	validate,
 	form: 'PostsNewForm'
-})(PostsNew);
+})(
+	connect(null, { createPost })(PostsNew)
+);
