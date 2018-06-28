@@ -23,3 +23,15 @@ Click [here](https://github.com/StephenGrider/ReactStarter/releases) then downlo
 > npm install
 > npm start
 ```
+
+#### React summary
+1. React - user clicks something
+2. action creator - creates action
+3. Flows into middleware
+4. passes actions -> reducers
+5. updates app state
+6. -> React
+
+Note
+- use Thunk for async
+- returns function
